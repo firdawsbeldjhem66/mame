@@ -6,64 +6,18 @@
     <title>إلى أغلى إنسانة</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0; padding: 0;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #fff5f8 0%, #fbc2eb 100%);
-            font-family: 'Amiri', serif;
-            overflow: hidden; color: #ad1457;
-        }
-
-        /* شاشة البداية */
-        #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff; z-index: 10;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: 1s ease-out;
-        }
-
-        #start-btn {
-            padding: 15px 40px; font-size: 1.5rem;
-            background: #e91e63; color: white; border: none;
-            border-radius: 50px; cursor: pointer;
-            font-family: 'Aref Ruqaa', serif;
-            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
-            animation: pulse 1.5s infinite;
-        }
-
-        /* محتوى الموقع */
+        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(135deg, #fff5f8 0%, #fbc2eb 100%); font-family: 'Amiri', serif; overflow: hidden; color: #ad1457; }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 1s; }
+        #start-btn { padding: 15px 40px; font-size: 1.5rem; background: #e91e63; color: white; border: none; border-radius: 50px; cursor: pointer; font-family: 'Aref Ruqaa', serif; box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4); animation: pulse 1.5s infinite; }
         .container { text-align: center; padding: 20px; display: none; width: 100%; }
-        
-        h1 { font-family: 'Aref Ruqaa', serif; font-size: 2.5rem; margin-bottom: 20px; }
-
-        .message-box {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px; border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            max-width: 85%; margin: 0 auto;
-            min-height: 250px; position: relative;
-        }
-
-        #typing-text { font-size: 1.3rem; line-height: 2; color: #4a148c; }
-
-        .heart-icon { font-size: 60px; color: #e91e63; margin-bottom: 10px; }
-
-        /* القلوب المتطايرة */
-        .floating-heart {
-            position: absolute; bottom: -10px; user-select: none;
-            pointer-events: none; animation: floatUp 6s linear forwards;
-        }
-
-        @keyframes floatUp {
-            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+        h1 { font-family: 'Aref Ruqaa', serif; font-size: 2.2rem; margin-bottom: 20px; }
+        .message-box { background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); max-width: 85%; margin: 0 auto; min-height: 250px; }
+        #typing-text { font-size: 1.2rem; line-height: 1.8; color: #4a148c; font-weight: bold; }
+        .floating-heart { position: absolute; bottom: -10px; user-select: none; pointer-events: none; animation: floatUp 6s linear forwards; }
+        @keyframes floatUp { to { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        /* إخفاء مشغل اليوتيوب */
+        #youtube-player { position: absolute; width: 0; height: 0; border: 0; visibility: hidden; }
     </style>
 </head>
 <body>
@@ -74,40 +28,40 @@
     </div>
 
     <div class="container" id="main-content">
-        <div class="heart-icon">❤️</div>
-        <h1>كل عام وأنتِ جنتي</h1>
-        
+        <div style="font-size: 50px;">❤️</div>
+        <h1>أمي.. يا جنة الله</h1>
         <div class="message-box">
             <p id="typing-text"></p>
         </div>
     </div>
 
-   <audio id="bg-music" loop>
-    <source src="https://f.top4top.io/m_22438v1u71.mp3" type="audio/mpeg">
-    </audio>
+    <div id="youtube-player">
+        <iframe id="video" width="0" height="0" 
+            src="https://www.youtube.com/embed/PjAnK6p5_m8?enablejsapi=1" 
+            frameborder="0" allow="autoplay">
+        </iframe>
+    </div>
 
     <script>
-        const text = `إلى ملكة قلبي وأول حب في حياتي..
-بمناسبة 26 فبراير، أردت أن أخبركِ أمام العالم..
-شكراً لأنكِ اخترتِ أن تكوني أمي، وشكراً لأنكِ جعلتِ من بيتنا جنة.
-أدعو الله في كل سجدة أن يطيل في عمرك، وأن يلبسك ثوب الصحة والعافية،
-وأن تظل ضحكتكِ هي الضوء الذي ينير دربي.
-أحبكِ فوق ما يتخيله عقلكِ.. كل عام وأنتِ بخير يا ست الحبايب.`;
+        const text = `أمي الغالية.. يا جنة الله على الأرض..
+في يوم 26 فبراير، أشرقت حياتي بوجودكِ.
+أمي التي علمتني الأصول، وسهرت لأرتاح، وتعبت لأنجح.
+شكراً لأنكِ كنتِ السند القوي، والقلب الرحيم.
+اللهم احفظ لي أمي، وأطل في عمرها، واجعل أيامها كلها سعادة.
+كل عام وأنتِ بخير يا أغلى من روحي.. أحبكِ جداً.`;
 
         function startSurprise() {
-            // إخفاء شاشة البداية
+            // إخفاء شاشة الدخول
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('overlay').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 
-                // تشغيل الموسيقى
-                const music = document.getElementById('bg-music');
-                music.play().catch(e => console.log("Audio play failed: ", e));
+                // تشغيل أغنية يوتيوب (أمي جنة)
+                const iframe = document.getElementById('video');
+                iframe.src += "&autoplay=1";
                 
-                // بدء كتابة النص
                 typeWriter();
-                // بدء إطلاق القلوب
                 setInterval(createHeart, 400);
             }, 1000);
         }
@@ -117,22 +71,20 @@
             if (index < text.length) {
                 document.getElementById("typing-text").innerHTML += text.charAt(index);
                 index++;
-                setTimeout(typeWriter, 120); // سرعة الكتابة
+                setTimeout(typeWriter, 110);
             }
         }
 
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('floating-heart');
-            const hearts = ['❤️', '💖', '🌸', '✨'];
-            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            const icons = ['❤️', '💖', '💐', '✨'];
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            heart.style.duration = (Math.random() * 3 + 4) + 's';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 6000);
         }
     </script>
 </body>
-
 </html>
